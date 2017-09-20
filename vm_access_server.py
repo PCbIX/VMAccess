@@ -81,7 +81,8 @@ class PowershellSession:
                 return self._term.vm_status()
             elif data == 'stop':
                 self._term.manage_vm('Stop-VM -TurnOff')
-                print('%sToken #%s stopped %s' %(time.strftime("%y.%m.%d/%H:%M:%S - "),
+                print('%sToken #%s stopped %s'
+                  %(time.strftime("%y.%m.%d/%H:%M:%S - "),
                   self._token, self._chosen_vm))
                 return self._term.vm_status()
             elif data == 'shutdown':

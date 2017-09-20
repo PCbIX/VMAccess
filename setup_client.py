@@ -1,4 +1,3 @@
-import sys
 import time
 from cx_Freeze import setup, Executable
 
@@ -11,8 +10,6 @@ build_exe_options = {
 }
 
 base = None
-#if sys.platform == "win32":
-#    base = "Win32GUI"
 
 setup(
     name = "VMAccessClient",
