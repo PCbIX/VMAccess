@@ -7,7 +7,8 @@ def read_cfg(token):
             if re.match('#' + token + '.*', line):
                 res = []
                 res.append(token)
-                res.append(cfg[i + 1].split('$ClusterName = ', 1)[1].split()[0])
+                res.append(cfg[i + 1].split(
+                  '$ClusterName = ', 1)[1].split()[0])
                 res.append(cfg[i + 2].split('$VMFilter = ', 1)[1].split()[0])
                 return res
         return None

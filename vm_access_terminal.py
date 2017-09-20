@@ -1,4 +1,3 @@
-import re
 import subprocess as sp
 
 import vm_access_parse as vmap
@@ -42,16 +41,21 @@ class Terminal:
             line = self._proc.stdout.readline()
 
     def get_vm_list(self):
-        self.write('$CR = Get-Cluster "*%s*" | Get-ClusterResource | ? ResourceType -EQ "Virtual Machine"' %(self._cluster_name))
-        self.write('$FVM = $CR | ? Name -Like "*%s*" | Get-VM' %(self._vm_filter))
+        self.write('$CR = Get-Cluster "*%s*" | Get-ClusterResource | '
+          '? ResourceType -EQ "Virtual Machine"' %(self._cluster_name))
+        self.write('$FVM = $CR | ? Name -Like "*%s*" | '
+          'Get-VM' %(self._vm_filter))
         self.clear()
-        self.write('$FVM | Format-Table -Property Name, State -HideTableHeaders -AutoSize')
+        self.write('$FVM | Format-Table -Property Name, '
+          'State -HideTableHeaders -AutoSize')
         self._vm_list = vmap.parse_vm_list(self.read())
 
         guru = []
-        guru.append('Welcome, #%s!\r\n\r\nChoose a virtual machine to start working with:\r\n\r\n' %(self._token))
+        guru.append('Welcome, #%s!\r\n\r\nChoose a virtual machine '
+          'to start working with:\r\n\r\n' %(self._token))
         for i, line in enumerate(self._vm_list, start = 1):
-            guru.append('[%s] -------- %s -------- %s\r\n' %(str(i), line[0], line[1]))
+            guru.append('[%s] -------- %s -------- %s\r\n'
+              %(str(i), line[0], line[1]))
         answer = "".join(guru)
         return answer
 
@@ -68,8 +72,12 @@ class Terminal:
             return ''
 
     def vm_status(self):
-        self.write('$CVM | select Name,State,CPUUsage,@{n="MemoryAssigned(GB)";e={$_.MemoryAssigned/1gb}},@{n="MemoryDemand(GB)";e={$_.MemoryDemand/1gb}},Uptime,@{n="IP";e={$(($_.NetworkAdapters.IPAddresses) -join " , ")}}')
-        return ('\t###STATUS###\n%s\n###restart, stop, start, shutdown, help###' %(vmap.parse_vm_status(self.read())))
+        self.write('$CVM | select Name,State,CPUUsage,@{n="MemoryAssigned(GB)"'
+          ';e={$_.MemoryAssigned/1gb}},@{n="MemoryDemand(GB)"'
+          ';e={$_.MemoryDemand/1gb}},Uptime,@{n="IP"'
+          ';e={$(($_.NetworkAdapters.IPAddresses) -join " , ")}}')
+        return ('\t###STATUS###\n%s\n###restart, stop, start, shutdown, '
+          'help###' %(vmap.parse_vm_status(self.read())))
 
     def manage_vm(self, command):
         key = ''
