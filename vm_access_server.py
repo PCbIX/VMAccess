@@ -160,7 +160,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
 
-    title = 'VMAccessServer v0.1'
+    title = 'VMAccessServer v0.1.1'
     os.system("title " + title)
 
     sys.stdout = Logger()

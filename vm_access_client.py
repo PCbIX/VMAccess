@@ -16,7 +16,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
 
-    title = 'VMAccessClient v0.1'
+    title = 'VMAccessClient v0.1.1'
     os.system("title " + title)
 
     host = None
