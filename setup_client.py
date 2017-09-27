@@ -2,7 +2,8 @@ import time
 from cx_Freeze import setup, Executable
 
 build_exe_options = {
-  "build_exe": "bin/build_client%s" %(time.strftime(" - %y.%m.%d-%H.%M.%S")),
+  "build_exe": "bin/VMAccess_client%s" %(time.strftime("-%y.%m.%d-%H.%M.%S")),
+  #"build_exe": "bin/VMAccess_client",
   "packages": ["os", "ssl", "sys"],
   "excludes": [],
   "zip_include_packages": "*",

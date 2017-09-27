@@ -2,7 +2,8 @@ import time
 from cx_Freeze import setup, Executable
 
 build_exe_options = {
-  "build_exe": "bin/build_server%s" %(time.strftime(" - %y.%m.%d-%H.%M.%S")),
+  "build_exe": "bin/VMAccess_server%s" %(time.strftime("-%y.%m.%d-%H.%M.%S")),
+  #"build_exe": "bin/VMAccess_server",
   "packages": [
     "select",
     "socket",

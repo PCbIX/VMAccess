@@ -1,6 +1,6 @@
 # VMAccess
 
-VMAccess stands for Virtual Machine Access, a small client-server RBAC utility for Hyper-V (Windows Server and Windows & Linux client machines supported).
+**VMAccess** stands for **Virtual Machine Access**, a small client-server **RBAC utility for Hyper-V** (Windows Server and Windows & Linux client machines supported).
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ Don't worry, there's nothing sophisticated about it; you just need to read this 
 
 ### Prerequisites
 
-If you're going to simply utilize this tool, you can skip straight to [**Installing**](README.md/#installation).
+_If you're going to simply utilize this tool, you can skip straight to [**Installing**](README.md/#installation)._
 
 To launch client and server applications there are no special requirements - all files are already included.
 
@@ -20,14 +20,37 @@ If you want to further develop VMAccess, you need to have installed:
   Run `python -m pip install portalocker` in your terminal to install it;  look [(here)](https://pypi.python.org/pypi/portalocker) for more details on `portalocker`;
 - `cx_Freeze` is used to build the executables out of source files; more details on `cx_Freeze` [here](https://anthony-tuininga.github.io/cx_Freeze/).
 
-Additionally, we recommend to use either PyCharm ([Community Edition](https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [VSCode](https://code.visualstudio.com/Download) for development, though this advice is one big IMHO and is ridiculous in case you already have a Python IDE you're comfortable with.
+Additionally, we recommend to use either _PyCharm_ ([_Community Edition_](https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [_VSCode_](https://code.visualstudio.com/Download) for development, though this advice is one big IMHO and is ridiculous in case you already have a Python IDE you're comfortable with.
 
 ### Installation
 
+#### 1. Getting binaries
 
+There are two general ways to get binaries of VMAccess:
+  1. Copy `\bin\VMAccess_client` and `\bin\VMAccess_server` folders to your client machines and to the server respectively. You can place them anywhere or even extract their contents, but please keep `.exe` files in the same folder with `library.rar`.
+  2. Compile the binaries from source `.py` files yourself, runnning `setup_client.py` and `setup_server.py`:
 
+  ```
+  #Assuming you've open your terminal/command line in VMAccess directory:
 
+  python setup_client.py build
+  python setup_server.py build
+  ```
 
+  The resulting folders `VMAccess_client-YY.MM.DD.-HH.MM.SS` and `VMAccess_server-YY.MM.DD.-HH.MM.SS` should be copied to the client machines and to the server respectively (just like mentioned above in paragraph 1).
+  You may reasonably like to see more convenient names of resulting folders, so to change them you can either replace the `"build_exe": "bin/VMAccess...` strings in `setup_client.py` and `setup_server.py` with the commented strings (you'll get `\bin\VMAccess_client` and `\bin\VMAccess_server` folders this way) or even with your own values:
+
+  **From `setup_client.py`:**
+  ```
+  build_exe_options = {
+      #"build_exe": "bin/VMAccess_client%s" %(time.strftime("-%y.%m.%d-%H.%M.%S")), #This name is lame! No way!
+      "build_exe": "I_can_pick_whatever_name_and_path_I_want", #just because I can! Pickle Rick!
+      "packages": ["os", "ssl", "sys"],
+      "excludes": [],
+      "zip_include_packages": "*",
+      "zip_exclude_packages": []
+  }
+  ``` 
 
 
 
