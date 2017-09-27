@@ -5,23 +5,29 @@ VMAccess stands for Virtual Machine Access, a small client-server RBAC utility f
 ## Getting Started
 
 VMAccess is extremely easy to use, but you'll need somewhat 30 minutes to fully understand the requirements for the most reliable system configuration.
-Don't worry, there's nothing sophisticated about it; you just need to read this manual carefully, **'Prerequisites'** and **'Installation'** sections, actually.
+Don't worry, there's nothing sophisticated about it; you just need to read this manual carefully, **_Prerequisites_** and **_Installation_** sections, actually.
 
 ### Prerequisites
 
-If you're going to simply utilize this tool, you can skip straight to **'Installing'**
+If you're going to simply utilize this tool, you can skip straight to **_Installing_**.
 
 To launch client and server applications there are no special requirements - all (Python interpreter + libraries + source code) files are already included.
 
-If you want to further develop VMAccess, you'll need to install:
+If you want to further develop VMAccess, you need to have installed:
 
-- Python 3.6 or newer (though earlier versions of Python, starting from Python 3.4, will probably be fine, too);
-- 'portalocker' is used to guarantee that changes to log file would not be missed because of someone looking through log at the same time; get it by running 'pip install portalocker' in your terminal; look [(here)] (https://pypi.python.org/pypi/portalocker) for more details on 'portalocker';
-- 'cx_Freeze' is used to build the executables out of source files; more details on cx_Freeze [here] (https://anthony-tuininga.github.io/cx_Freeze/).
+- **Python 3.6** or newer _(though earlier versions of Python, starting from **Python 3.4**, will probably be fine, too)_;
+- `portalocker` is used to guarantee that changes to log file would not be missed because of someone looking through log at the same time.
+  Run `python -m pip install portalocker` in your terminal to install it;  look [(here)](https://pypi.python.org/pypi/portalocker) for more details on `portalocker`;
+- `cx_Freeze` is used to build the executables out of source files; more details on `cx_Freeze` [here](https://anthony-tuininga.github.io/cx_Freeze/).
 
-Additionally, we recommend to use either PyCharm ([Community Edition] (https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [VSCode] (https://code.visualstudio.com/Download) for development, though this advice is one big IMHO and is ridiculous in case you already have a Python IDE you're comfortable with.
+Additionally, we recommend to use either PyCharm ([Community Edition](https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [VSCode](https://code.visualstudio.com/Download) for development, though this advice is one big IMHO and is ridiculous in case you already have a Python IDE you're comfortable with.
 
 ### Installing
+
+
+
+
+
 
 
 
