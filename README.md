@@ -5,11 +5,11 @@ VMAccess stands for Virtual Machine Access, a small client-server RBAC utility f
 ## Getting Started
 
 VMAccess is extremely easy to use, but you'll need somewhat 30 minutes to fully understand the requirements for the most reliable system configuration.
-Don't worry, there's nothing sophisticated about it; you just need to read this manual carefully, [**Prerequisites**](#prerequisites) and [**Installation**](#installation) sections especially.
+Don't worry, there's nothing sophisticated about it; you just need to read this manual carefully, [**Prerequisites**](README.md/#prerequisites) and [**Installation**](README.md/#installation) sections especially.
 
 ### Prerequisites
 
-If you're going to simply utilize this tool, you can skip straight to [**Installing**](#installation).
+If you're going to simply utilize this tool, you can skip straight to [**Installing**](README.md/#installation).
 
 To launch client and server applications there are no special requirements - all files are already included.
 
