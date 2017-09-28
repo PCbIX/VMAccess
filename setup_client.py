@@ -5,6 +5,7 @@ build_exe_options = {
   "build_exe": "bin/VMAccess_client%s" %(time.strftime("-%y.%m.%d-%H.%M.%S")),
   #"build_exe": "bin/VMAccess_client",
   "packages": ["os", "ssl", "sys"],
+  "include_files": "VMAccess_client.cfg",
   "excludes": [],
   "zip_include_packages": "*",
   "zip_exclude_packages": []

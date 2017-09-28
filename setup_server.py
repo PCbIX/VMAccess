@@ -15,6 +15,7 @@ build_exe_options = {
     "vm_access_parse",
     "os"
   ],
+  "include_files": "VMAccess_server.cfg",
   "excludes": [],
   "zip_include_packages": "*",
   "zip_exclude_packages": []

@@ -2,10 +2,12 @@
 
 **VMAccess** stands for **Virtual Machine Access**, a small client-server **RBAC utility for Hyper-V** (Windows Server and Windows & Linux client machines supported).
 
+
 ## Getting Started
 
 VMAccess is extremely easy to use, but you'll need somewhat 30 minutes to fully understand the requirements for the most reliable system configuration.
 Don't worry, there's nothing sophisticated about it; you just need to read this manual carefully, [**Prerequisites**](#prerequisites) and [**Installation**](#installation) sections especially.
+
 
 ### Prerequisites
 
@@ -22,12 +24,14 @@ If you want to further develop VMAccess, you need to have installed:
 
 Additionally, we recommend to use either _PyCharm_ ([_Community Edition_](https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [_VSCode_](https://code.visualstudio.com/Download) for development, though this advice is one big IMHO and is ridiculous in case you already have a Python IDE you're comfortable with.
 
+
 ### Installation
 
 #### 1. Getting binaries
 
 There are two general ways to get binaries of VMAccess:
   1. Copy `\bin\VMAccess_client` and `\bin\VMAccess_server` folders to your client machines and to the server respectively. You can place them anywhere or even extract their contents, but please keep `.exe` files in the same folder with `library.rar`.
+  
   2. Compile the binaries from source `.py` files yourself, runnning `setup_client.py` and `setup_server.py`:
 
   ```
@@ -38,6 +42,7 @@ There are two general ways to get binaries of VMAccess:
   ```
 
   The resulting folders `VMAccess_client-YY.MM.DD.-HH.MM.SS` and `VMAccess_server-YY.MM.DD.-HH.MM.SS` should be copied to the client machines and to the server respectively (just like mentioned above in paragraph 1).
+  
   You may reasonably like to see more convenient names of resulting folders, so to change them you can either replace the `"build_exe": "bin/VMAccess...` strings in `setup_client.py` and `setup_server.py` with the commented strings (you'll get `\bin\VMAccess_client` and `\bin\VMAccess_server` folders this way) or even with your own values:
 
   **From `setup_client.py`:**
@@ -53,69 +58,29 @@ There are two general ways to get binaries of VMAccess:
   ``` 
 
 
+#### 2. Configuration files
 
-```
-Give the example
-```
+Now you have **2 files that need to be configured**: `VMAccess_client.cfg` in your 'client' folder and `VMAccess_server.cfg` in your 'server' folder.
 
-And repeat
+Change them in a way that fits your purposes:
 
-```
-until finished
-```
+**In `VMAccess_client.cfg`:**
+  - `host = <IP>` - replace `<IP>` to your server ip address;
+  - `port = <PORT>`- replace `<PORT>` with your server's port;
+  - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator; this is used for authentification.
 
-End with an example of getting some data out of the system or using it for a little demo
+**In `VMAccess_server.cfg`:**
+  - `host = <IP>` - replace `<IP>` to your server ip address;
+  - `port = <PORT>`- replace `<PORT>` with your server's port;
+  - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator; this is used for authentification.
+ 
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Anton Potapov** - *Powershell commands, system design & debugging* - [workservice](https://github.com/workservice)
+* **Roman Krivonogov** - *Python implementation & docs* - [FourthRome](https://github.com/FourthRome) 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+This project is licensed under the  GNU GPLv3 - see the [LICENSE.md](LICENSE.md) file for details.
