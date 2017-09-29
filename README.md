@@ -95,8 +95,22 @@ To set up the service properly, follow [this instruction](https://nssm.cc/usage)
 
 #### 4. YOU'RE AWESOME!
 
-## 3. Using VMAccess
 
+## 3. VMAccess user interface
+
+VMAccess user interface is intuitive for anyone familiar with terminal/command line. After successful authorization (i.e. verifying client's token is presented int the list of tokens) user is provided with a list of all VMs that are available for them to manage.
+
+To choose a particular machine they need to type a valid index of VM from the list, and they'll be directed to a console where this exact VM can be managed.
+
+User can **`start`**, **`stop`**, **`restart`** and **`shutdown`** chosen VM or get back to the list of all VMs available by typing **`return`**. 
+
+Information about exact VM can be manually updated with **`status`** command and is updated automatically after any command is sent.
+
+List of VMs can be manually refreshed with **`refresh`** command and is updated automatically after any command is sent.
+
+You can always get a list of available commands by typing **`help`**.
+
+The program can be exited either by typing **`exit`** command or pressing **`Ctrl` + `C`**.
 
 ## Authors
 
