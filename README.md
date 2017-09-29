@@ -17,11 +17,10 @@ Pay attention to [**Installation**](#installation) section especially.
 If you want to further develop VMAccess, you need to have installed:
 
 - **Python 3.6** or newer _(though earlier versions of Python, starting from **Python 3.4**, will probably be fine, too)_;
-- **`portalocker`** is used to guarantee that changes to log file would not be lost because of someone looking through log at the same time.
-  Run **`python -m pip install portalocker`** in your terminal to install it;  look [here](https://pypi.python.org/pypi/portalocker) for more details.
+- **`portalocker`** is used to guarantee that changes to log file would not be lost because of someone looking through log at the same time. Look [here](https://pypi.python.org/pypi/portalocker) for more details.
 - **`cx_Freeze`** is used to build the executables out of source files; more details [here](https://anthony-tuininga.github.io/cx_Freeze/).
 
-Additionally, we recommend to use either _PyCharm_ ([_Community Edition_](https://anthony-tuininga.github.io/cx_Freeze/) is fine) or [_VSCode_](https://code.visualstudio.com/Download) for development.
+Additionally, we recommend to use either _PyCharm_ ([_Community Edition_](https://www.jetbrains.com/pycharm/download/) is fine) or [_VSCode_](https://code.visualstudio.com/Download) for development.
 
 
 ### Installation
@@ -34,9 +33,9 @@ There are two general ways to get binaries of VMAccess:
 
 2. Compile the binaries from source `.py` files yourself.
 
-**_The first option is recommended for those who just want the working utility. Head straight to [Configuration files](#configuration-files)._**
+**_The first option is recommended for those who just want the working utility. Head straight to [Configuration files](#2-configuration-files)._**
 
-To customize the installation, run **`setup_client.py`** and **`setup_server.py`** with `build` option:  
+To customize the installation, run **`setup_client.py`** and **`setup_server.py`** with **`build`** option:  
   
 ```
 #Assuming you've open your terminal/command line in VMAccess directory:
@@ -45,11 +44,13 @@ python setup_client.py build
 python setup_server.py build
 ```
 
-The resulting folders **`bin\VMAccess_client-YY.MM.DD.-HH.MM.SS`** and **`bin\VMAccess_server-YY.MM.DD.-HH.MM.SS`** should be copied to the client machines and to the server respectively.  
+The resulting folders **`bin\VMAccess_client`** and **`bin\VMAccess_server`** should be copied to the client machines and to the server respectively.  
 
 To change default folders for binaries you should replace the  
-**`"build_exe": "bin/VMAccess...`**  
-strings in **`setup_client.py`** and **`setup_server.py`** with the commented strings with your own values:  
+
+**`"build_exe": "bin/VMAccess...`**  strings
+
+in **`setup_client.py`** and **`setup_server.py`** with your own values:  
 
 ```
 #From 'setup_client.py':
@@ -67,18 +68,19 @@ Now you have **2 files that need to be configured**: **`VMAccess_client.cfg`** i
 Change them in a way that fits your purposes:
 
 **In `VMAccess_client.cfg`:**
-  - `host = <IP>` - replace `<IP>` to your server ip address;
+  - `host = <IP>` - replace `<IP>` with your server ip address;
   - `port = <PORT>`- replace `<PORT>` with your server's port;
-  - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator (it must not have spaces). This is used for authentification.
+  - `token = <TOKEN>` - replace `<TOKEN>` with a unique user identificator (it must not have spaces). This is used for authentification.
 
 
 **In `VMAccess_server.cfg`:**
-  - `log = "log.log"` - replace `log.log` with the path to the file you want to use as log. If it does not exist, it will be created. _Note that filenames are framed with `""`._
+  - `log = "log.log"` - replace `log.log` with the path to the file you want to use as log. If it does not exist, it will be created. _Note that filename is framed with `""`;_
   - `host = <IP>` - replace `<IP>` to the **ip address you want to allow connections from**; leave `0.0.0.0` in case you want to allow all ip addresses;
   - `port = <PORT>`- replace `<PORT>` with your server's port;
   - `keyfile = "key.key"` and `certfile = "cert.cert"` - replace `key.key` and `cert.cert` with paths to your SSL certificates. _Note that filenames are framed with `""`._
 
-**IMPORTANT:** in `VMAccess_server.cfg`, below the `#Clients` string, place information about each client (identified with unique token) with the following syntax:
+
+**IMPORTANT:** in `VMAccess_server.cfg`, below the `#Clients` string, place information about each client (identified with unique token) using the following syntax:
 
 ```
 #Clients:
