@@ -70,10 +70,32 @@ Change them in a way that fits your purposes:
   - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator; this is used for authentification.
 
 **In `VMAccess_server.cfg`:**
-  - `host = <IP>` - replace `<IP>` to your server ip address;
+  - `log = "log.log"` - replace `<LOG>` with the path to the file you want to use as log; if it does not exist, it will be created;  
+  - `host = <IP>` - replace `<IP>` to the **ip address you want to allow connections from**; leave `0.0.0.0` in case you want to allow all ip addresses;
   - `port = <PORT>`- replace `<PORT>` with your server's port;
-  - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator; this is used for authentification.
- 
+  - `keyfile = "key.key"` and `certfile = "cert.cert"` - replace `key.key` and `cert.cert` with paths to your SSL certificates; note that filenames are framed with `""`
+
+**IMPORTANT:** in `VMAccess_server.cfg`, below the `#Clients` string, place information about each client (identified with unique token) with the following syntax:
+
+```
+
+#345678 #Client's token
+$ClusterName = HVCL #CLuster name which will be used in Powershell filtered search
+$VMFilter = test #Name that will be used as a filter to search for VMs
+
+```
+
+#### 3. Setting up server application as Windows Service (OPTIONAL)
+
+You can, for sure, just launch your server application every time you start the server, but there's a more automated way - to make our server application a Windows Service.
+
+To achieve that, we highly recommend using [NSSM](https://nssm.cc/). Download it [here](https://nssm.cc/download).
+
+To set up the service properly, follow [this instruction](https://nssm.cc/usage).
+
+#### 4. YOU'RE AWESOME!
+
+## 3. Using VMAccess
 
 
 ## Authors
