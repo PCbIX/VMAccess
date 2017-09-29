@@ -85,22 +85,22 @@ $VMFilter = test       #Name that will be used as a filter to search for VMs
 
 ```
 
-#### 3. Setting up server application as Windows Service (OPTIONAL)
+#### 3. Making server application autorun (OPTIONAL)
 
-If you want server application to autostart, you should make it a Windows Service.
-To achieve that, we highly recommend using [NSSM](https://nssm.cc/). Download it [here](https://nssm.cc/download).
-To set up the service properly, follow [this instruction](https://nssm.cc/usage).
+If you want server application to autostart, you should make it a Windows Service.  
+To achieve that, we highly recommend using [NSSM](https://nssm.cc/). Download it [here](https://nssm.cc/download).  
+To set up the service properly, follow [this instruction](https://nssm.cc/usage).  
 
 ## 3. VMAccess user interface
 
-VMAccess user interface is a regular console interface. 
-If client's token was correct, user is provided with a list of all VMs that are available for them to manage.
-To choose a particular machine they need to type a valid index of VM from the list.
-User can **`start`**, **`stop`**, **`restart`** and **`shutdown`** chosen VM or get back to the list of all VMs available by typing **`return`**. 
-Information about exact VM can be manually updated with **`status`** command and is updated automatically after any command is sent.
-List of VMs can be manually refreshed with **`refresh`** command and is updated automatically after any command is sent.
-You can always get a list of available commands by typing **`help`**.
-The program can be exited either by typing **`exit`** command or pressing **`Ctrl` + `C`**.
+VMAccess user interface is a regular console interface.  
+If client's token was correct, user is provided with a list of all VMs that are available for them to manage.  
+To choose a particular machine they need to type a valid index of VM from the list.  
+User can **`start`**, **`stop`**, **`restart`** and **`shutdown`** chosen VM or get back to the list of all VMs available by typing **`return`**.  
+Information about exact VM can be manually updated with **`status`** command and is updated automatically after any command is sent.  
+List of VMs can be manually refreshed with **`refresh`** command and is updated automatically after any command is sent.  
+You can always get a list of available commands by typing **`help`**.  
+The program can be exited either by typing **`exit`** command or pressing **`Ctrl` + `C`**.  
 
 ## Authors
 
