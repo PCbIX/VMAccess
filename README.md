@@ -11,7 +11,7 @@ Pay attention to [**Installation**](#installation) section especially.
 
 ### Prerequisites
 
-**_If you're going to simply utilize this tool, you can skip straight to [Installation](README.md/#installation)._**
+**_If you're going to simply utilize this tool, you can skip straight to [Installation](#installation)._**
 
 
 If you want to further develop VMAccess, you need to have installed:
