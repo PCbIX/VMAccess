@@ -31,33 +31,29 @@ Additionally, we recommend to use either _PyCharm_ ([_Community Edition_](https:
 
 **There are two general ways to get binaries of VMAccess:**
 
-  **1.** Copy **`\bin\VMAccess_client`** and **`\bin\VMAccess_server`** folders to your client machines and to the server respectively. You can place them anywhere or even extract their contents, but please keep `.exe` files in the same folder with `library.rar`.
+**1.** Copy **`\bin\VMAccess_client`** and **`\bin\VMAccess_server`** folders to your client machines and to the server respectively. You can place them anywhere or even extract their contents, but please keep `.exe` files in the same folder with `library.rar`.
+
+**2.** Compile the binaries from source `.py` files yourself, running **`setup_client.py`** and **`setup_server.py`**:
+
+```
+  #Assuming you've open your terminal/command line in VMAccess directory:
+
+  python setup_client.py build
+  python setup_server.py build
+```
+
+The resulting folders **`VMAccess_client-YY.MM.DD.-HH.MM.SS`** and **`VMAccess_server-YY.MM.DD.-HH.MM.SS`** should be copied to the client machines and to the server respectively (just like mentioned above in paragraph 1).
   
-  **2.** Compile the binaries from source `.py` files yourself, running **`setup_client.py`** and **`setup_server.py`**:
+You may reasonably like to see more convenient names of resulting folders, so to change them you can either replace the **`"build_exe": "bin/VMAccess...`** strings in **`setup_client.py`** and **`setup_server.py`** with the commented strings (you'll get **`\bin\VMAccess_client`** and **`\bin\VMAccess_server`** folders this way) or even with your own values:
 
-    ```
-    #Assuming you've open your terminal/command line in VMAccess directory:
+**From `setup_client.py`:**
 
-    python setup_client.py build
-    python setup_server.py build
-    ```
-
-    The resulting folders **`VMAccess_client-YY.MM.DD.-HH.MM.SS`** and **`VMAccess_server-YY.MM.DD.-HH.MM.SS`** should be copied to the client machines and to the server respectively (just like mentioned above in paragraph 1).
-    
-    You may reasonably like to see more convenient names of resulting folders, so to change them you can either replace the **`"build_exe": "bin/VMAccess...`** strings in **`setup_client.py`** and **`setup_server.py`** with the commented strings (you'll get **`\bin\VMAccess_client`** and **`\bin\VMAccess_server`** folders this way) or even with your own values:
-
-    **From `setup_client.py`:**
-    ```
-    build_exe_options = {
-        #"build_exe": "bin/VMAccess_client%s" %(time.strftime("-%y.%m.%d-%H.%M.%S")), #This name is lame! No way!
-        "build_exe": "I_can_pick_whatever_name_and_path_I_want", #just because I can! Pickle Rick!
-        "packages": ["os", "ssl", "sys"],
-        "excludes": [],
-        "zip_include_packages": "*",
-        "zip_exclude_packages": []
-    }
-    ``` 
-
+```
+build_exe_options = {
+    "build_exe": "I_can_pick_whatever_name_and_path_I_want",    #just because I can! Pickle Rick!
+    ...
+}
+``` 
 
 #### 2. Configuration files
 
@@ -70,11 +66,12 @@ Change them in a way that fits your purposes:
   - `port = <PORT>`- replace `<PORT>` with your server's port;
   - `token = <TOKEN>` - replace `<TOKEN>` with whatever unique user identificator; this is used for authentification.
 
+
 **In `VMAccess_server.cfg`:**
-  - `log = "log.log"` - replace `<LOG>` with the path to the file you want to use as log; if it does not exist, it will be created;  
+  - `log = "log.log"` - replace `log.log` with the path to the file you want to use as log. If it does not exist, it will be created. Note that filenames are framed with `""`.
   - `host = <IP>` - replace `<IP>` to the **ip address you want to allow connections from**; leave `0.0.0.0` in case you want to allow all ip addresses;
   - `port = <PORT>`- replace `<PORT>` with your server's port;
-  - `keyfile = "key.key"` and `certfile = "cert.cert"` - replace `key.key` and `cert.cert` with paths to your SSL certificates; note that filenames are framed with `""`
+  - `keyfile = "key.key"` and `certfile = "cert.cert"` - replace `key.key` and `cert.cert` with paths to your SSL certificates. Note that filenames are framed with `""`.
 
 **IMPORTANT:** in `VMAccess_server.cfg`, below the `#Clients` string, place information about each client (identified with unique token) with the following syntax:
 
@@ -86,15 +83,14 @@ $VMFilter = test #Name that will be used as a filter to search for VMs
 
 ```
 
+
 #### 3. Setting up server application as Windows Service (OPTIONAL)
 
-You can, for sure, just launch your server application every time you start the server, but there's a more automated way - to make our server application a Windows Service.
+We can make our server application an auto-started Windows Service.
 
 To achieve that, we highly recommend using [NSSM](https://nssm.cc/). Download it [here](https://nssm.cc/download).
 
 To set up the service properly, follow [this instruction](https://nssm.cc/usage).
-
-#### 4. YOU'RE AWESOME!
 
 
 ## 3. VMAccess user interface
@@ -113,10 +109,14 @@ You can always get a list of available commands by typing **`help`**.
 
 The program can be exited either by typing **`exit`** command or pressing **`Ctrl` + `C`**.
 
+
+
 ## Authors
 
 * **Anton Potapov** - *Powershell commands, system design & debugging* - [workservice](https://github.com/workservice)
 * **Roman Krivonogov** - *Python implementation & docs* - [FourthRome](https://github.com/FourthRome) 
+
+
 
 ## License
 
