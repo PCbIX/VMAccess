@@ -11,7 +11,7 @@ Pay attention to [**Installation**](#installation) section especially.
 
 ### Prerequisites
 
-**_If you're going to simply utilize this tool, you can skip straight to [**Installation**](README.md/#installation)._**
+**_If you're going to simply utilize this tool, you can skip straight to [Installation](README.md/#installation)._**
 
 
 If you want to further develop VMAccess, you need to have installed:
@@ -32,29 +32,33 @@ There are two general ways to get binaries of VMAccess:
 
 1. Copy **`\bin\VMAccess_client`** and **`\bin\VMAccess_server`** folders to your client machines and to the server respectively.
 
-2. Compile the binaries from source `.py` files yourself, running **`setup_client.py`** and **`setup_server.py`**:  
-  
-  ```
-  #Assuming you've open your terminal/command line in VMAccess directory:
+2. Compile the binaries from source `.py` files yourself.
 
-  python setup_client.py build
-  python setup_server.py build
-  ```
+**_The first option is recommended for those who just want the working utility. Head straight to [Configuration files](#configuration-files)._**
 
-  The resulting folders **`bin\VMAccess_client-YY.MM.DD.-HH.MM.SS`** and **`bin\VMAccess_server-YY.MM.DD.-HH.MM.SS`** should be copied to the client machines and to the server respectively.  
+To customize the installation, run **`setup_client.py`** and **`setup_server.py`** with `build` option:  
   
-  To change default folders for binaries you should replace the  
-  **`"build_exe": "bin/VMAccess...`**  
-  strings in **`setup_client.py`** and **`setup_server.py`** with the commented strings with your own values:  
-  
-  ```
-  #From 'setup_client.py':
+```
+#Assuming you've open your terminal/command line in VMAccess directory:
 
-  build_exe_options = {
-      "build_exe": "I_can_pick_whatever_name_and_path_I_want",    #just because I can! Pickle Rick!
-      ...
-  }
-  ``` 
+python setup_client.py build
+python setup_server.py build
+```
+
+The resulting folders **`bin\VMAccess_client-YY.MM.DD.-HH.MM.SS`** and **`bin\VMAccess_server-YY.MM.DD.-HH.MM.SS`** should be copied to the client machines and to the server respectively.  
+
+To change default folders for binaries you should replace the  
+**`"build_exe": "bin/VMAccess...`**  
+strings in **`setup_client.py`** and **`setup_server.py`** with the commented strings with your own values:  
+
+```
+#From 'setup_client.py':
+
+build_exe_options = {
+    "build_exe": "I_can_pick_whatever_name_and_path_I_want",    #just because I can! Pickle Rick!
+    ...
+}
+``` 
 
 #### 2. Configuration files
 
