@@ -3,8 +3,15 @@ import os
 import ssl
 import sys
 
-def prompt():
-    print('<VMACCESS>', end='')
+max_msg_size = 4096
+VERSION = "v1.1"
+TITLE = "VMAccessClient " + VERSION
+ERROR_TAG = "ERROR: "
+
+def prompt(text, clear=True):
+    if clear:
+        os.system('cls')
+    print(text, "<VMACCESS>", end="", sep= "\n" if text else "")
 
 def u_recv(sock, maxsize):
     return sock.recv(maxsize).decode('utf-8')
@@ -13,11 +20,10 @@ def u_send(sock, message):
     sock.send(message.encode('utf-8'))
 
 def main(argv=None):
-    if argv is None:
-        argv = sys.argv
+    #if argv is None:
+    #    argv = sys.argv
 
-    title = 'VMAccessClient v0.1.1'
-    os.system("title " + title)
+    os.system("title " + TITLE)
 
     host = None
     port = None
@@ -26,120 +32,95 @@ def main(argv=None):
     with open('client.cfg', 'r') as cfg: 
         for line in cfg:
             if line.startswith('host'):
-                host = line.split()[2]
+                host = line.split("=")[1].strip().split()[0]
             elif line.startswith('port'):
-                port = int(line.split()[2])
+                port = int(line.split("=")[1].strip().split()[0])
             elif line.startswith('token'):
-                token = line.split()[2]
-            if host is not None and port is not None and token is not None:
+                token = line.split("=")[1].strip().split()[0]
+            if host and port and token is not None:
                 break
 
-    if host is None:
-        print('Error occurred: information about host is not found!')
+    if not host:
+        print(ERROR_TAG + "host is not specified")
         return 1
-    elif port is None:
-        print('Error occurred: information about port is not found!')
+    elif not port:
+        print(ERROR_TAG + "port is not specified")
         return 1
     elif token is None:
-        print('Error occurred: information about token is not found!')
+        print(ERROR_TAG + "token is not specified")
         return 1
 
-    raw_s = None
-    s = None
-
     try:
-        raw_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        raw_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except OSError as e:
-        print('Error occurred: failed to set up socket!\r\n%s' %(e))
+        print(ERROR_TAG + "failed to set up socket\n{0}".format(e))
         return 1
 
     try:
-        s = ssl.wrap_socket(
-          raw_s,
-          ssl_version=ssl.PROTOCOL_TLSv1_2,
-          ciphers='AES256-SHA256')
+        sock = ssl.wrap_socket(
+                raw_sock,
+                ssl_version=ssl.PROTOCOL_TLSv1_2,
+                ciphers='AES256-SHA256')
     except SSLError as e:
-        print('Error occurred: failed to set up SSL!\r\n%s' %(e))
+        print(ERROR_TAG + "failed to set up SSL!\n{0}".format(e))
         return 1
 
     try:
-        s.connect((host, port))
+        sock.connect((host, port))
     except OSError as e:
-        print('Error occurred: failed to connect to server!\r\n%s' %(e))
+        print(ERROR_TAG + "failed to connect to server!\n{0}".format(e))
         return 1
 
     try:
-        max_msg_size = 4096
-        
-        u_send(s, token)
-        data = u_recv(s, max_msg_size)
+        u_send(sock, token)
+        data = u_recv(sock, max_msg_size)
 
         if data:
-            os.system('cls')
-            print(data)
-            prompt()
-
+            prompt(data)
             vm_chosen = False
             command = input()
             
-            while (command):
-                if vm_chosen:
-                    if (command == 'exit'):
-                        os.system('cls')
-                        s.close()
-                        return 0
-                    elif (command == 'help'):
-                        os.system('cls')
-                        print('HERE ARE THE COMMANDS YOU CAN USE NOW:\r\n\r\n'
-                          'restart ------- Restart current VM\r\n'
-                          'stop ---------- Stop current VM\r\n'
-                          'start --------- Start current VM\r\n'
-                          'shutdown ------ Shutdown current VM '
-                          '(send signal to OS)\r\n' 
-                          'status -------- Get info about current VM\r\n'
-                          'return -------- Get back to the list of VMs\r\n'
-                          'exit ---------- Get the hell out of all '
-                          'this VM stuff\r\n'
-                          'help ---------- Guess what? NOT VM\r\n')
-                        prompt()
+            while (command != "exit"):
+                if not command:
+                    prompt("", clear=False)
+                elif vm_chosen:
+                    if (command == "help"):
+                        prompt("HERE ARE THE COMMANDS YOU CAN USE NOW:\n\n"
+                               "restart ------- Restart current VM\n"
+                               "stop ---------- Stop current VM\n"
+                               "start --------- Start current VM\n"
+                               "shutdown ------ Shutdown current VM (send signal to OS)\n"
+                               "status -------- Get info about current VM\n"
+                               "return -------- Get back to the list of VMs\n"
+                               "exit ---------- Get the hell out of all this VM stuff\n"
+                               "help ---------- Guess what? NOT VM\n")
                     else:
-                        if (command == 'return'):
+                        if (command == "return"):
                             vm_chosen = False
-                        u_send(s, command)
-                        data = u_recv(s, max_msg_size)
-                        os.system('cls')
-                        print(data)
-                        prompt()
+                        u_send(sock, command)
+                        prompt(u_recv(sock, max_msg_size))
                 else:
-                    if (command == 'exit'):
-                        os.system('cls')
-                        s.close()
-                        return 0
-                    elif (command == 'help'):
-                        os.system('cls')
-                        print('YOU CAN TYPE THE NUMBER OF VM YOU WANT TO '
-                          'MANAGE OR ONE OF THE FOLLOWING COMMANDS:\r\n\r\n'
-                          'refresh ------- Refresh the list of VMs\r\n'
-                          'exit ---------- Exit\r\n'
-                          'help ---------- Help page\r\n')
-                        prompt()
+                    if (command == "help"):
+                        prompt("YOU CAN TYPE THE NUMBER OF VM YOU WANT TO MANAGE OR ONE OF THE FOLLOWING COMMANDS:\n\n"
+                               "refresh ------- Refresh the list of VMs\n"
+                               "exit ---------- Exit\n"
+                               "help ---------- Help page\n")
                     else:
-                        u_send(s, command)
-                        data = u_recv(s, max_msg_size)
-                        os.system('cls')
-                        print(data)
-                        prompt()
-                        if not data.startswith('Sorry'):
+                        u_send(sock, command)
+                        data = u_recv(sock, max_msg_size)
+                        prompt(data)
+
+                        if not data.startswith("Sorry"):
                             vm_chosen = True
 
                 command = input()
 
     except KeyboardInterrupt:
-        print('Keyboard interrupt detected, stopping the client...\n%s' %(e))
+        print("Keyboard interrupt detected, stopping the client...\n{0}".format(e))
     finally:
-        s.close()
+        sock.close()
         os.system('cls')
-        return 1
+        return 0
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
-
+client.cfg
+.idea
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
@@ -6,3 +7,4 @@
 .idea/workspace.xml
 .idea/codeStyleSettings.xml
 .idea/dictionaries/A_creature.xml
+
