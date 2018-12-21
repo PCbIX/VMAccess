@@ -29,7 +29,7 @@ def main(argv=None):
     port = None
     token = None
 
-    with open('client.cfg', 'r') as cfg: 
+    with open('VMAccess_client.cfg', 'r') as cfg: 
         for line in cfg:
             if line.startswith('host'):
                 host = line.split("=")[1].strip().split()[0]
