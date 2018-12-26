@@ -3,15 +3,11 @@ import os
 import ssl
 import sys
 
+from console_formatting import prompt, print_error
+
 max_msg_size = 4096
 VERSION = "v1.1"
 TITLE = "VMAccessClient " + VERSION
-ERROR_TAG = "ERROR: "
-
-def prompt(text, clear=True):
-    if clear:
-        os.system('cls')
-    print(text, "<VMACCESS>", end="", sep= "\n" if text else "")
 
 def u_recv(sock, maxsize):
     return sock.recv(maxsize).decode('utf-8')
@@ -19,10 +15,7 @@ def u_recv(sock, maxsize):
 def u_send(sock, message):
     sock.send(message.encode('utf-8'))
 
-def main(argv=None):
-    #if argv is None:
-    #    argv = sys.argv
-
+def main():
     os.system("title " + TITLE)
 
     host = None
@@ -39,21 +32,22 @@ def main(argv=None):
                 token = line.split("=")[1].strip().split()[0]
             if host and port and token is not None:
                 break
+    
 
     if not host:
-        print(ERROR_TAG + "host is not specified")
+        print_error("host is not specified")
         return 1
     elif not port:
-        print(ERROR_TAG + "port is not specified")
+        print_error("port is not specified")
         return 1
     elif token is None:
-        print(ERROR_TAG + "token is not specified")
+        print_error("token is not specified")
         return 1
 
     try:
         raw_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except OSError as e:
-        print(ERROR_TAG + "failed to set up socket\n{0}".format(e))
+        print_error("failed to set up socket", e)
         return 1
 
     try:
@@ -62,13 +56,13 @@ def main(argv=None):
                 ssl_version=ssl.PROTOCOL_TLSv1_2,
                 ciphers='AES256-SHA256')
     except SSLError as e:
-        print(ERROR_TAG + "failed to set up SSL!\n{0}".format(e))
+        print_error("failed to set up SSL!", e)
         return 1
 
     try:
         sock.connect((host, port))
     except OSError as e:
-        print(ERROR_TAG + "failed to connect to server!\n{0}".format(e))
+        print_error("failed to connect to server!", e)
         return 1
 
     try:
